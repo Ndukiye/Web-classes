@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The DOM</title>
+</head>
+<body>
+    <h1 id="dom">Understanding the DOM</h1>
+    <nav id="navbar">
+        <a href="">Home</a>
+        <a href="">About Us</a>
+        <a href="">Contact</a>
+        <a href="">Gallery</a>
+    </nav>
+
+    <h2>Our Services</h2>
+    <ul id="services">
+        <li class="service">Data Analysis</li>
+        <li class="service">Project Management</li>
+        <li class="service">Graphics Design</li>
+        <li class="service">Virtual Assistant</li>
+    </ul>
+
+    <script>
+        /*
+            DOM (Document Object model): Represents all page contents as objects that can be modified.
+            The document object is the main entry point to the page. We can change everything on the page using it.
+        */
+        
+        function changeColor(){
+            const colors = ["green","beige","blue","red","pink","orange","purple", "yellow", "lavender"]
+            let i = 0;
+            setInterval(() => {
+                document.body.style.backgroundColor = colors[i];
+                i === colors.length  ? i = 0 : i++
+            }, 3000);
+        }
+        changeColor()
+
+        // Selecting Elements
+        // Using ID names
+        let header = document.getElementById("dom")
+        header.style.color = "blue";
+
+        // Using Query Selector
+        const navbar = document.querySelector("#navbar")
+        const navbarA = document.querySelector("#navbar a")
+        const navbarA2 = document.querySelectorAll("#navbar a")
+        console.log(navbarA)
+        console.log(navbarA2)
+        for(let i = 0; i < navbarA2.length; i++){
+            navbarA2[i].style.background = "grey";
+            navbarA2[i].style.padding = "25px";
+        };
+        console.log(navbar.nodeName);
+        console.log(navbar.nodeType);
+        console.log(navbar.tagName);
+        console.log(navbar.firstChild);
+
+        //using class names
+        const services = document.getElementsByClassName('service')
+        console.log(services)
+        services[3].style.fontSize = "30px"
+
+        // Using Tag Names
+        const btns = document.getElementsByTagName("button")
+        console.log(btns)
+
+        // Javascript Project Ideas
+        /*
+        navbar
+        sidebar
+        slider carousel
+        implement Countdown
+        Implement- accordion functionality
+        calculator
+        */
+    </script>
+</body>
+</html>

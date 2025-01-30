@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <img src="" alt="">
+        <button id="prev">previous</button>
+        <button id="nxt">next</button>
+    </div>
+
+    <script>
+    let images = [
+        '/jsClasses/tictactoe/img/o.png',
+        '/jsClasses/tictactoe/img/x.png',
+        '/jsClasses/tictactoe/img/One Pierce Wallpaper.jpg'
+    ];
+
+    let currentIndex = 0;
+    let imgElement = document.querySelector('img');
+    let prevButton = document.getElementById('prev');
+    let nextButton = document.getElementById('nxt');
+
+    function showImage(index) {
+        imgElement.src = images[index];
+    }
+
+    prevButton.addEventListener('click', function() {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+        showImage(currentIndex);
+    });
+
+    nextButton.addEventListener('click', function() {
+        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+        showImage(currentIndex);
+    });
+
+    // Initialize the slider with the first image
+    showImage(currentIndex);
+    </script>
+</body>
+</html>
