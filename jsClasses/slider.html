@@ -4,28 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        img {
+            width: 50vw;
+            height: 60vh;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <div>
         <img src="" alt="">
+        <p></p>
         <button id="prev">previous</button>
         <button id="nxt">next</button>
     </div>
-
+    <!-- <a href='/jsClasses/img/pexels-cesarperez209-733745.jpg'></a> -->
     <script>
     let images = [
-        '/jsClasses/tictactoe/img/o.png',
-        '/jsClasses/tictactoe/img/x.png',
-        '/jsClasses/tictactoe/img/One Pierce Wallpaper.jpg'
+        '/jsClasses/img/@𝐌𝟏𝐊𝟒𝐒𝐀𝐔𝐒𝐄.jpg',
+        '/jsClasses//img/anime-moon-landscape.jpg',
+        '/jsClasses/img/d98b7415-f146-45bc-8aaf-b0ca1665ff9b.jpg',
+        '/jsClasses/img/f85076b6-0a4f-45a2-a9cc-75f386852d67.jpg',
+        '/jsClasses/img/Monkey D Luffy Wallpaper.jpg',
+        '/jsClasses/img/pexels-ahmedadly-1270184.jpg',
+        '/jsClasses/img/pexels-cesarperez209-733745.jpg',
+        '/jsClasses/img/One Pierce Wallpaper.jpg'
     ];
 
     let currentIndex = 0;
     let imgElement = document.querySelector('img');
     let prevButton = document.getElementById('prev');
     let nextButton = document.getElementById('nxt');
+    let img_no = document.querySelector('p');
 
     function showImage(index) {
         imgElement.src = images[index];
+        img_no.textContent = `${index + 1} / ${images.length}`;
     }
 
     prevButton.addEventListener('click', function() {
