@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li{
+            padding: 1rem;
+            list-style: none;
+            border: 1px solid;
+            width: fit-content;
+            margin: 0.5rem;
+            background-color: burlywood;
+        }
+        ul{
+            display: flex;
+            background-color: brown;
+            padding: 1rem;
+        }
+        .strike{
+            text-decoration: line-through;
+        }
+        .red{
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>Blog</li>
+                <li>Services</li>
+                <li>Contact US</li>
+            </ul>
+        </nav>
+        <div>
+            <!-- contact us -->
+            <button onclick="strike()">Click to strike</button> 
+            <!-- home -->
+            <button onclick="remove()">Click to Remove Red</button> 
+            <button onclick="add()">Click to Add Red</button>
+            <!-- services -->
+            <button onclick="toggle()">Click to Toggle Red on Blog</button>
+        </div>
+    </header>
+
+    <script>
+        const lists = document.querySelectorAll("li")
+        function strike() {
+            lists[3].classList.add("strike")
+        }   
+
+        function remove() {
+            lists[0].classList.remove("red")
+        }
+
+        function add() {
+            lists[0].classList.add("red")
+        }
+
+        function toggle() {
+            lists[1].classList.toggle("red")
+        }
+    </script>
+</body>
+</html>

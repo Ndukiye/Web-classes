@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        span{
+            color: rgb(125, 75, 75);
+        }
+        .active{
+            background-color: aqua !important;
+        }
+        img {
+            max-width: 50vw;
+            max-height: 60vh;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .list-item{
+          color: brown;
+        }
+        .special{
+          color: green;
+        }
+        .strike{
+          text-decoration: line-through blue;
+        }
+    </style>
+  </head>
+  <body>
+      <div style="padding:20px; background-color: grey;">
+          <h1>Count<span>er</span></h1>
+          <h3 id="value">0</h3>
+          <button id="inc" onclick="inc()" style="cursor: pointer; background-color: green; padding: 8px; border-radius: 20px;">Increase</button>
+          <button id= "dec" onclick="dec()" style="cursor: pointer; background-color: brown; padding: 8px; border-radius: 20px;">Decrease</button>
+          <button id="res" onclick="res()" style="cursor: pointer; background-color: white; padding: 8px; border-radius: 20px;">Reset</button>
+        </div>
+        <button onclick="changeImg()">Add image</button>
+        <br>
+        <img src="" alt="" id="image">
+
+        <h3>Favourite Dishes</h3>
+        <ul id="foods">
+            <li>Noodles</li>
+            <li id="ch">Chicken</li>
+            <li>Beans</li>
+        </ul>
+        <button onclick="strike()">Strike</button>
+    <script>
+        let count = 0;
+        const value = document.getElementById('value')
+        let incBtn = document.getElementById('inc')
+        function inc() {
+          count++;
+          value.textContent = count;
+        };
+
+        function dec(){
+          if (count === 0) {
+          }else{
+            count--;
+            value.textContent = count;
+          }
+        };
+
+        function res(){
+          count = 0;
+          value.textContent = count;
+        };
+        console.log(incBtn.hasAttribute('src'))
+        incBtn.setAttribute('class', 'active')
+        console.log(incBtn.getAttribute('class'))
+
+        const images = ['/jsClasses/img/One Pierce Wallpaper.jpg']
+        function changeImg(){
+            const img = document.getElementById('image')
+            img.setAttribute('src', images[0])
+        }
+
+        //creating Element
+        const li = document.createElement('li');
+        li.textContent = 'Amala & Ewedu';
+        const foods = document.getElementById('foods');
+        foods.append(li)
+        foods.children[2].textContent = "Garri"
+        console.log()
+        
+        // Look up difference between innerText, innerHtml and TextContent
+
+        // Traversing the Dom
+        // Child Node Traversal
+        const ul2 = document.querySelector('ul')
+        console.log(ul2.childNodes)
+        console.log(ul2.children)
+        console.log(ul2.firstChild)
+        console.log(ul2.lastChild)
+        console.log(ul2.firstElementChild)
+        console.log(ul2.lastElementChild)
+        
+        //Parent Node Traversal
+        console.log(ul2.parentNode)
+        console.log(ul2.parentElement)
+
+        // Sibling Node Traversal
+        console.log(li.previousSibling)
+        console.log(li.nextSibling)
+        console.log(li.previousElementSibling)
+        console.log(li.nextElementSibling)
+
+        //Removing Elements
+        document.getElementById('ch').remove();
+
+        //modifying Classes
+        const li2 = document.createElement('li');
+        li2.textContent = 'Bread';
+        ul2.append(li2);
+        li2.classList.add('list-item');
+        // li2.classList.add('list-item');
+        // li2.classList.remove('list-item');
+
+        function strike(){
+          li2.classList.toggle('strike')
+        }
+ </script>
+  </body>
+</html>
