@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        body {
+            background-color: lightslategray;
+            padding: 30px;
+            background-image: url('https://images.unsplash.com/photo-1612838320303-4b3b3b3b3b3b');
+        }
+        .container{
+            background-color: lavender;
+            max-width: 400px;
+            margin: auto;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+        }
+        .container button{
+            padding: 8px;
+            border-radius: 15px;
+        }
+        .container input {
+            padding: 8px;
+        }
+        #todo-list{
+            list-style: none;
+        }
+        #todo-list li{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 20px;
+            background-color: aliceblue;
+            border: 2px dashed lightblue;
+            margin-top: 5px;
+        }
+        #todo-list li.completed{
+            text-decoration: line-through;
+        }
+        .complete-btn{
+            background-color: green;
+            width: 100%;
+            height: 30%;
+            color: white;
+        }
+        .delete-btn{
+            background-color: red;
+            width: 100%;
+            height: 30%;
+            color: white;
+        }
+        .edit-btn{
+            background-color: lightyellow;
+            width: 100%;
+            height: 30%;
+        }
+        .btns{
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Todo List</h1>
+        <input type="text" placeholder="Add a New task" id="new-task">
+        <button id="add-btn">Add Task</button>
+        <ul id="todo-list">
+
+        </ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const taskInput = document.getElementById('new-task');
+            const addBtn = document.getElementById('add-btn');
+            const todoList = document.getElementById('todo-list');
+
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [] ;
+            tasks.forEach(task => addTaskToDom(task));
+
+            addBtn.addEventListener('click', () => {
+                const taskText = taskInput.value.trim();
+                if (taskText){  
+                    const task = { text: taskText, completed: false}
+                    tasks.push(task);
+                    addTaskToDom(task);
+                    saveTasks();
+                    taskInput.value = '';
+                }
+            });
+
+            function addTaskToDom(task){
+                const li = document.createElement('li');
+                li.className = task.completed ? "completed" : '';
+                li.innerHTML = `
+                <span id="span">${task.text}</span>
+                <div class="btns">
+                    <button class="complete-btn">Task Complete</button>
+                    <button class="edit-btn">Edit Task</button>
+                    <button class="delete-btn">Delete Task</button>
+                </div>
+                `
+                // Complete task
+                li.querySelector('.complete-btn').addEventListener('click', () => {
+                    task.completed = !task.completed
+                    li.classList.toggle('completed');
+                    saveTasks();
+                    });
+                // Edit task
+                li.querySelector('.edit-btn').addEventListener('click', () => {
+                    const edit = prompt("Edit task: ", task.text);
+                    if (edit !== null && edit.trim() !== ""){
+                        task.text = edit.trim();
+                        li.querySelector('span').textContent = task.text;
+                        saveTasks();
+                    }
+                 });
+                        
+                // Delete Tasks
+                li.querySelector('.delete-btn').addEventListener('click', () => {
+                    todoList.removeChild(li);
+                    tasks.splice(tasks.indexOf(task), 1);
+                    saveTasks();
+                })
+                todoList.appendChild(li);
+            };
+
+            // Save tasks to Local storage
+            function saveTasks(){
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            };
+        });
+    </script>
+</body>
+</html>

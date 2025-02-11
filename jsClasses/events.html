@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events in Javascript</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Event Handling</h1>
+        <p id="para">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit dolor laboriosam dicta maiores porro eius.</p>
+        <button id="btn1">&Xi;</button>
+        <button id="btn2" style="display:none;">&#10060;</button>
+    </div>
+    <input type="text" id="name" placeholder="Enter your name">
+    
+    <form action="" id="myForm">
+        <input type="text" placeholder="Enter your email">
+        <button type="submit"> Submit </button>
+    </form>
+    <button id="btn3" style="display:none;">&#10060;</button>
+
+    <div id="dragItem" draggable="true" style="width: 50px; height: 50px; background: red;">
+
+    </div>
+
+    <div id="dropZone" style="width: 200px; height: 200px; border: 2px dashed black;">
+
+    </div>
+
+    <script>
+        //Syntax = element.addEventListener("eventName",eventHandler)
+
+        const btn1 = document.getElementById('btn1')
+        const btn2 = document.getElementById('btn2')
+
+        btn1.addEventListener('click', function(){
+            btn1.style.display = 'none'
+            btn2.style.display = 'block'
+        })
+
+        btn2.addEventListener('click', function(){
+            btn1.style.display = 'block'
+            btn2.style.display = 'none'
+        })
+
+        const para = document.getElementById('para')
+        para.addEventListener('mouseover', function(){
+            para.style.color = 'red'
+        })
+        para.addEventListener('mouseout', function(){
+            para.style.color = 'green'
+        })
+
+        //Keydown event
+        document.addEventListener('keydown', function(e){
+            console.log("Key down is: " + e.key);
+        })
+
+        //keypress Event
+        document.addEventListener('keypress', function(e){
+            console.log("Key pressed is: " + e.key);
+        })
+
+        //Change event
+        document.getElementById('name').addEventListener('keypress', function(){
+            console.log("Input Changed to: " + this.value);
+        })
+
+        //event.preventDefault() - This method is used to stop the default behaivour of an event.
+        // Submit event
+        document.getElementById('myForm').addEventListener("submit", function(e){
+            e.preventDefault(); // To prevent default submission
+            alert("Form submitted!")
+        });
+
+        //Focus event
+        document.getElementById('name').addEventListener("focus", function(){
+            this.style.backgroundColor = "yellow";
+        });
+
+         //Blur event
+         document.getElementById('name').addEventListener("blur", function(){
+            this.style.backgroundColor = "";
+        });
+
+         //scroll event
+         window.addEventListener("focus", function(){
+            console.log("page scrolled");
+        });
+
+        // Context menu
+        document.addEventListener("contextmenu", function(){
+            event.preventDefault();
+            document.body.style.backgroundColor = "lavender";
+            alert("Right-Click Disabled");
+
+        })
+
+        // dbl click
+        document.getElementById("btn3").addEventListener("dblclick", function(){
+            alert("Button X double Clicked!");
+
+        })
+
+        //Drag and Drop events
+        document.getElementById('dragItem').addEventListener('dragstart', function(event){
+            event.dataTransfer.setData('text', event.target.id)
+        });
+        document.getElementById('dropZone').addEventListener('dragover', function(event){
+            event.preventDefault();
+        });
+        document.getElementById('dropZone').addEventListener('drop', function(event){
+            // event.preventDefault();
+            const data = event.dataTransfer.getData('text');
+            event.target.appendChild(document.getElementById(data));
+        });
+
+    </script>
+</body>
+</html>

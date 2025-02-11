@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DragndDrop</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: burlywood;
+      }
+      section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        /* background: #f4f4f4; */
+        margin: 0;
+      }
+      .img-holders {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+      .img-holders img {
+        width: 15vw;
+        height: 30vh;
+        border: 1px solid #000;
+        background-color: white;
+      }
+      .dropzone {
+        width: 20vw;
+        height: 40vh;
+        border: 1px dashed #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="img-holders">
+        <img src="" alt=""/>
+        <img src="" alt="" />
+        <img src="" alt="" />
+        <img src="" alt="" />
+      </div>
+      <div class="dropzone">Drop files here</div>
+    </section>
+    <input type="file" id="fileinput" />
+    <script>
+      //     //Drag and Drop events
+      // document.getElementById('dragItem').addEventListener('dragstart', function(event){
+      //     event.dataTransfer.setData('text', event.target.id)
+      // });
+      // document.getElementById('dropZone').addEventListener('dragover', function(event){
+      //     event.preventDefault();
+      // });
+      // document.getElementById('dropZone').addEventListener('drop', function(event){
+      //     // event.preventDefault();
+      //     const data = event.dataTransfer.getData('text');
+      //     event.target.appendChild(document.getElementById(data));
+      // });
+
+      const dropZone = document.querySelector(".dropzone");
+      const fileinput = document.getElementById("fileinput");
+      const imgHolders = document.querySelectorAll("img");
+      dropZone.addEventListener("click", () => {
+        fileinput.click();
+      });
+
+      dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+      });
+
+      dropZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        imgHolders[0].src = URL.createObjectURL(e.dataTransfer.files[0]);
+      });
+
+      fileinput.addEventListener("change", (e) => {
+        imgHolders[0].src = URL.createObjectURL(e.target.files[0]);
+      });
+
+      let draggedIndex;
+      for (let i = 0; i < imgHolders.length; i++) {
+        imgHolders[i].addEventListener("dragstart", (e) => {
+          draggedIndex = i;
+          e.dataTransfer.setData("text", e.target.id);
+        });
+
+        imgHolders[i].addEventListener("dragover", (e) => {
+          e.preventDefault();
+        });
+
+        imgHolders[i].addEventListener("drop", (e) => {
+          e.preventDefault();     
+            let tempSrc = imgHolders[i].src;
+            imgHolders[i].src = imgHolders[draggedIndex].src;
+            imgHolders[draggedIndex].src = ""; 
+        });
+      }
+    </script>
+  </body>
+</html>
